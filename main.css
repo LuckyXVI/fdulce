@@ -761,14 +761,14 @@ body.sunrise .sun-glow {
 
 .sunflower--3 {
     left: 50%;
+    margin-left: -72.5px;
 
     --flower-size: 165px;
     --rotation: -3deg;
     --sway-time: 5.8s;
     --head-time: 4.8s;
-    --center-offset: -50%;
 
-    transform: translateX(-50%);
+    transform: none;
 }
 
 .sunflower--4 {
