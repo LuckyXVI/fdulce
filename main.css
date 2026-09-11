@@ -1,0 +1,1304 @@
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+    --yellow: #ffef00;
+    --yellow-soft: #ffd92f;
+    --gold: #f5b82e;
+    --green: #315d2d;
+    --green-dark: #19351b;
+    --brown: #432512;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+}
+
+body {
+    overflow: hidden;
+    background: #02030a;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100dvh;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(50, 56, 105, 0.22),
+            transparent 35%
+        ),
+        linear-gradient(
+            to bottom,
+            #02030a 0%,
+            #050817 60%,
+            #080b16 100%
+        );
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+}
+
+.intro-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-content {
+    position: relative;
+    z-index: 2;
+
+    width: min(90%, 420px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    animation: introAppear 1.5s ease both;
+}
+
+.intro-kicker {
+    margin-bottom: 14px;
+
+    color: rgba(255, 239, 170, 0.7);
+
+    font-family: Arial, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+}
+
+.intro-content h1 {
+    color: #fff8dc;
+
+    font-size: clamp(2rem, 8vw, 3.2rem);
+    font-weight: normal;
+    line-height: 1.15;
+
+    text-shadow:
+        0 0 18px rgba(255, 220, 100, 0.15);
+}
+
+.intro-symbol {
+    margin: 28px 0;
+
+    font-size: 3rem;
+
+    filter:
+        drop-shadow(0 0 15px rgba(255, 211, 48, 0.45));
+
+    animation: introFlower 3s ease-in-out infinite;
+}
+
+.start-button {
+    min-width: 130px;
+    min-height: 48px;
+
+    border: 1px solid rgba(255, 230, 120, 0.6);
+    border-radius: 30px;
+
+    background: rgba(255, 239, 0, 0.08);
+
+    color: #fff7d0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1rem;
+
+    letter-spacing: 0.12em;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.start-button:hover {
+    background: rgba(255, 239, 0, 0.16);
+
+    box-shadow:
+        0 0 25px rgba(255, 218, 50, 0.18);
+
+    transform: translateY(-2px);
+}
+
+.start-button:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================================================
+   ESCENARIO
+========================================================= */
+
+.story-scene {
+    position: relative;
+
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transition: opacity 1.5s ease;
+}
+
+body.story-running .story-scene {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   CIELO
+========================================================= */
+
+.sky {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #02030a 0%,
+            #05091b 45%,
+            #101733 72%,
+            #253b42 100%
+        );
+
+    transition:
+        background 7s ease;
+}
+
+body.sunrise .sky {
+    background:
+        linear-gradient(
+            to bottom,
+            #161327 0%,
+            #43304a 38%,
+            #b66a4e 72%,
+            #f3ad54 100%
+        );
+}
+
+
+/* =========================================================
+   ESTRELLAS
+========================================================= */
+
+.stars {
+    position: absolute;
+    inset: 0;
+
+    transition: opacity 5s ease;
+}
+
+.stars span {
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+
+    animation: starTwinkle 3s ease-in-out infinite;
+}
+
+.stars span:nth-child(1)  { top: 9%; left: 14%; }
+.stars span:nth-child(2)  { top: 16%; left: 67%; }
+.stars span:nth-child(3)  { top: 23%; left: 35%; }
+.stars span:nth-child(4)  { top: 12%; left: 82%; }
+.stars span:nth-child(5)  { top: 31%; left: 8%; }
+.stars span:nth-child(6)  { top: 36%; left: 55%; }
+.stars span:nth-child(7)  { top: 8%; left: 46%; }
+.stars span:nth-child(8)  { top: 27%; left: 91%; }
+.stars span:nth-child(9)  { top: 42%; left: 26%; }
+.stars span:nth-child(10) { top: 19%; left: 49%; }
+.stars span:nth-child(11) { top: 34%; left: 76%; }
+.stars span:nth-child(12) { top: 6%; left: 93%; }
+.stars span:nth-child(13) { top: 45%; left: 67%; }
+.stars span:nth-child(14) { top: 15%; left: 25%; }
+.stars span:nth-child(15) { top: 29%; left: 44%; }
+.stars span:nth-child(16) { top: 39%; left: 87%; }
+.stars span:nth-child(17) { top: 11%; left: 57%; }
+.stars span:nth-child(18) { top: 25%; left: 4%; }
+.stars span:nth-child(19) { top: 47%; left: 43%; }
+.stars span:nth-child(20) { top: 20%; left: 97%; }
+
+body.sunrise .stars {
+    opacity: 0.05;
+}
+
+
+/* =========================================================
+   LUNA
+========================================================= */
+
+.moon {
+    position: absolute;
+
+    top: 10%;
+    right: 13%;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    background: #fff8d8;
+
+    box-shadow:
+        0 0 25px rgba(255, 247, 201, 0.35);
+
+    transition:
+        opacity 5s ease,
+        transform 8s ease;
+}
+
+body.sunrise .moon {
+    opacity: 0;
+
+    transform:
+        translateY(-50px)
+        scale(0.7);
+}
+
+
+/* =========================================================
+   SOL / AMANECER
+========================================================= */
+
+.sun-glow {
+    position: absolute;
+
+    left: 50%;
+    bottom: -170px;
+
+    width: 350px;
+    height: 350px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 224, 101, 0.85) 0%,
+            rgba(255, 190, 60, 0.38) 30%,
+            rgba(255, 145, 45, 0.1) 55%,
+            transparent 70%
+        );
+
+    opacity: 0;
+
+    transition:
+        opacity 6s ease,
+        transform 8s ease;
+}
+
+body.sunrise .sun-glow {
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(-40px);
+}
+
+
+/* =========================================================
+   MENSAJES
+========================================================= */
+
+.messages {
+    position: absolute;
+    inset: 0;
+
+    z-index: 30;
+
+    pointer-events: none;
+}
+
+.message {
+    position: absolute;
+
+    top: 17%;
+    left: 50%;
+
+    width: min(90%, 650px);
+
+    transform:
+        translate(-50%, 12px)
+        scale(0.98);
+
+    opacity: 0;
+
+    color: #fff8e1;
+
+    text-align: center;
+
+    font-size: clamp(1.25rem, 5vw, 2.1rem);
+    line-height: 1.45;
+
+    text-shadow:
+        0 2px 15px rgba(0, 0, 0, 0.9),
+        0 0 25px rgba(0, 0, 0, 0.8);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+.message span,
+.message strong {
+    display: block;
+}
+
+.message strong {
+    margin-top: 7px;
+
+    color: #ffe66a;
+
+    font-weight: normal;
+}
+
+.message.active {
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0)
+        scale(1);
+}
+
+
+/* =========================================================
+   POSICIONES INDIVIDUALES
+========================================================= */
+
+.message--2 {
+    top: 19%;
+}
+
+.message--3 {
+    top: 20%;
+}
+
+.message--4 {
+    top: 20%;
+}
+
+.message--5 {
+    top: 21%;
+}
+
+.message--6 {
+    top: 17%;
+
+    font-size: clamp(1.4rem, 5.5vw, 2.25rem);
+}
+
+.message--6 strong {
+    font-size: 1.18em;
+}
+
+
+/* =========================================================
+   MENSAJE FINAL
+========================================================= */
+
+.final-message {
+    position: absolute;
+
+    top: 10%;
+    left: 50%;
+
+    z-index: 50;
+
+    width: min(90%, 650px);
+
+    padding: 18px 20px;
+
+    transform:
+        translate(-50%, 15px)
+        scale(0.97);
+
+    opacity: 0;
+
+    text-align: center;
+
+    color: #fff8e3;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(8, 10, 16, 0.38),
+            rgba(8, 10, 16, 0.18)
+        );
+
+    backdrop-filter: blur(3px);
+
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.9);
+
+    transition:
+        opacity 1.8s ease,
+        transform 1.8s ease;
+}
+
+.final-message.show {
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0)
+        scale(1);
+}
+
+.final-date {
+    color: #ffe47a;
+
+    font-family: Arial, sans-serif;
+    font-size: 0.72rem;
+    font-weight: bold;
+
+    letter-spacing: 0.3em;
+}
+
+.final-line {
+    width: 45px;
+    height: 1px;
+
+    margin: 13px auto 15px;
+
+    background: rgba(255, 230, 130, 0.7);
+}
+
+.final-message p {
+    font-size: clamp(1rem, 4.2vw, 1.35rem);
+    line-height: 1.5;
+
+    color: rgba(255, 248, 227, 0.9);
+}
+
+.final-message h1 {
+    margin-top: 10px;
+
+    color: #ffe66a;
+
+    font-size: clamp(1.55rem, 6vw, 2.4rem);
+    font-weight: normal;
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   JARDÍN
+========================================================= */
+
+.garden {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: -5px;
+
+    z-index: 20;
+
+    height: 54vh;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   GIRASOLES
+========================================================= */
+
+.sunflower {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 145px;
+    height: 390px;
+
+    transform-origin: bottom center;
+
+    animation:
+        sunflowerSway
+        var(--sway-time)
+        ease-in-out
+        infinite alternate;
+}
+
+.flower-head {
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: var(--flower-size);
+    height: var(--flower-size);
+
+    transform:
+        translateX(-50%)
+        rotate(var(--rotation));
+
+    animation:
+        headSway
+        var(--head-time)
+        ease-in-out
+        infinite alternate;
+
+    z-index: 4;
+}
+
+.flower-head i {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 31%;
+    height: 65%;
+
+    transform-origin: 50% 100%;
+    transform:
+        translate(-50%, -100%)
+        rotate(calc(var(--i) * 22.5deg));
+
+    border-radius:
+        50% 50% 42% 42%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #fff45c 0%,
+            var(--yellow) 45%,
+            #e5c400 100%
+        );
+
+    box-shadow:
+        0 0 9px rgba(255, 230, 30, 0.16);
+}
+
+.flower-head i:nth-child(1)  { --i: 0; }
+.flower-head i:nth-child(2)  { --i: 1; }
+.flower-head i:nth-child(3)  { --i: 2; }
+.flower-head i:nth-child(4)  { --i: 3; }
+.flower-head i:nth-child(5)  { --i: 4; }
+.flower-head i:nth-child(6)  { --i: 5; }
+.flower-head i:nth-child(7)  { --i: 6; }
+.flower-head i:nth-child(8)  { --i: 7; }
+.flower-head i:nth-child(9)  { --i: 8; }
+.flower-head i:nth-child(10) { --i: 9; }
+.flower-head i:nth-child(11) { --i: 10; }
+.flower-head i:nth-child(12) { --i: 11; }
+.flower-head i:nth-child(13) { --i: 12; }
+.flower-head i:nth-child(14) { --i: 13; }
+.flower-head i:nth-child(15) { --i: 14; }
+.flower-head i:nth-child(16) { --i: 15; }
+
+.flower-center {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 39%;
+    height: 39%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #6f421f,
+            #39200f 55%,
+            #1e1009 100%
+        );
+
+    box-shadow:
+        inset 0 0 12px rgba(0, 0, 0, 0.65),
+        0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+.stem {
+    position: absolute;
+
+    top: 75px;
+    left: 50%;
+
+    width: 11px;
+    height: 315px;
+
+    transform:
+        translateX(-50%)
+        rotate(1deg);
+
+    transform-origin: top center;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            to right,
+            #183c1b,
+            #47743b,
+            #234b23
+        );
+
+    z-index: 1;
+}
+
+.leaf {
+    position: absolute;
+
+    width: 82px;
+    height: 38px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #527d3b,
+            #1d4821
+        );
+
+    border-radius:
+        100% 0 100% 0;
+
+    z-index: 2;
+}
+
+.leaf-left {
+    left: 17px;
+    top: 245px;
+
+    transform:
+        rotate(-30deg);
+}
+
+.leaf-right {
+    right: 15px;
+    top: 290px;
+
+    transform:
+        scaleX(-1)
+        rotate(-25deg);
+}
+
+
+/* =========================================================
+   POSICIONES DE LOS 5 GIRASOLES
+========================================================= */
+
+.sunflower--1 {
+    left: -42px;
+
+    --flower-size: 118px;
+    --rotation: -8deg;
+    --sway-time: 5.2s;
+    --head-time: 4.4s;
+
+    transform: scale(0.92);
+}
+
+.sunflower--2 {
+    left: 13%;
+
+    --flower-size: 132px;
+    --rotation: 5deg;
+    --sway-time: 4.7s;
+    --head-time: 5.2s;
+
+    transform: scale(0.88);
+}
+
+.sunflower--3 {
+    left: 50%;
+
+    --flower-size: 165px;
+    --rotation: -3deg;
+    --sway-time: 5.8s;
+    --head-time: 4.8s;
+
+    transform:
+        translateX(-50%)
+        scale(1);
+}
+
+.sunflower--4 {
+    right: 13%;
+
+    --flower-size: 130px;
+    --rotation: 7deg;
+    --sway-time: 5s;
+    --head-time: 4.5s;
+
+    transform: scale(0.9);
+}
+
+.sunflower--5 {
+    right: -42px;
+
+    --flower-size: 115px;
+    --rotation: -6deg;
+    --sway-time: 4.9s;
+    --head-time: 5.4s;
+
+    transform: scale(0.9);
+}
+
+
+/* =========================================================
+   GRASS
+========================================================= */
+
+.grass {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 3px;
+    height: 90px;
+
+    background:
+        linear-gradient(
+            to top,
+            #132b16,
+            #3e7035
+        );
+
+    transform-origin: bottom;
+
+    border-radius: 100%;
+
+    animation:
+        grassSway
+        var(--grass-time)
+        ease-in-out
+        infinite alternate;
+}
+
+.grass--1 {
+    left: 7%;
+    --grass-time: 2.7s;
+    transform: rotate(-13deg);
+}
+
+.grass--2 {
+    left: 27%;
+    height: 120px;
+    --grass-time: 3.1s;
+    transform: rotate(12deg);
+}
+
+.grass--3 {
+    left: 70%;
+    height: 100px;
+    --grass-time: 2.4s;
+    transform: rotate(-10deg);
+}
+
+.grass--4 {
+    left: 85%;
+    height: 130px;
+    --grass-time: 3.4s;
+    transform: rotate(14deg);
+}
+
+.grass--5 {
+    left: 94%;
+    height: 80px;
+    --grass-time: 2.8s;
+    transform: rotate(-12deg);
+}
+
+
+/* =========================================================
+   LUCIÉRNAGAS
+========================================================= */
+
+.fireflies {
+    position: absolute;
+    inset: 0;
+
+    z-index: 25;
+
+    pointer-events: none;
+}
+
+.fireflies span {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #ffe66a;
+
+    box-shadow:
+        0 0 9px rgba(255, 225, 75, 0.8);
+
+    animation:
+        fireflyFloat
+        var(--fly-time)
+        ease-in-out
+        infinite alternate;
+}
+
+.fireflies span:nth-child(1) {
+    left: 12%;
+    top: 55%;
+    --fly-time: 4s;
+}
+
+.fireflies span:nth-child(2) {
+    left: 28%;
+    top: 64%;
+    --fly-time: 5s;
+}
+
+.fireflies span:nth-child(3) {
+    left: 43%;
+    top: 57%;
+    --fly-time: 3.7s;
+}
+
+.fireflies span:nth-child(4) {
+    left: 61%;
+    top: 65%;
+    --fly-time: 4.5s;
+}
+
+.fireflies span:nth-child(5) {
+    left: 77%;
+    top: 53%;
+    --fly-time: 3.9s;
+}
+
+.fireflies span:nth-child(6) {
+    left: 88%;
+    top: 69%;
+    --fly-time: 5.2s;
+}
+
+.fireflies span:nth-child(7) {
+    left: 19%;
+    top: 73%;
+    --fly-time: 4.2s;
+}
+
+.fireflies span:nth-child(8) {
+    left: 52%;
+    top: 72%;
+    --fly-time: 3.5s;
+}
+
+.fireflies span:nth-child(9) {
+    left: 69%;
+    top: 59%;
+    --fly-time: 4.8s;
+}
+
+body.sunrise .fireflies {
+    opacity: 0.15;
+
+    transition: opacity 5s ease;
+}
+
+
+/* =========================================================
+   ANIMACIONES
+========================================================= */
+
+@keyframes introAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes introFlower {
+    0%,
+    100% {
+        transform: translateY(0) rotate(-3deg);
+    }
+
+    50% {
+        transform: translateY(-7px) rotate(3deg);
+    }
+}
+
+@keyframes starTwinkle {
+    0%,
+    100% {
+        opacity: 0.35;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.25);
+    }
+}
+
+@keyframes sunflowerSway {
+    from {
+        transform:
+            translateX(var(--x-offset, 0))
+            rotate(-1deg);
+    }
+
+    to {
+        transform:
+            translateX(var(--x-offset, 0))
+            rotate(1deg);
+    }
+}
+
+@keyframes headSway {
+    from {
+        transform:
+            translateX(-50%)
+            rotate(var(--rotation));
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            rotate(calc(var(--rotation) + 3deg));
+    }
+}
+
+@keyframes grassSway {
+    from {
+        transform:
+            rotate(-8deg);
+    }
+
+    to {
+        transform:
+            rotate(8deg);
+    }
+}
+
+@keyframes fireflyFloat {
+    from {
+        opacity: 0.2;
+        transform:
+            translate(0, 0)
+            scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translate(12px, -18px)
+            scale(1.2);
+    }
+}
+
+
+/* =========================================================
+   TABLET / DESKTOP
+========================================================= */
+
+@media (min-width: 601px) {
+
+    .garden {
+        height: 57vh;
+    }
+
+    .sunflower {
+        height: 440px;
+    }
+
+    .stem {
+        height: 365px;
+    }
+
+    .message {
+        top: 18%;
+    }
+
+    .message--2,
+    .message--3,
+    .message--4,
+    .message--5 {
+        top: 20%;
+    }
+
+    .final-message {
+        top: 11%;
+    }
+}
+
+
+/* =========================================================
+   CELULARES
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .intro-content h1 {
+        font-size: 2.25rem;
+    }
+
+    .intro-symbol {
+        margin: 24px 0;
+    }
+
+    .moon {
+        width: 43px;
+        height: 43px;
+
+        top: 8%;
+        right: 10%;
+    }
+
+    .sun-glow {
+        width: 280px;
+        height: 280px;
+        bottom: -145px;
+    }
+
+    .message {
+        top: 14%;
+
+        width: 88%;
+
+        font-size: 1.28rem;
+        line-height: 1.5;
+    }
+
+    .message--2,
+    .message--3,
+    .message--4 {
+        top: 15%;
+    }
+
+    .message--5 {
+        top: 16%;
+    }
+
+    .message--6 {
+        top: 13%;
+
+        font-size: 1.38rem;
+    }
+
+    .final-message {
+        top: 8%;
+
+        width: 88%;
+
+        padding: 14px 12px;
+    }
+
+    .final-date {
+        font-size: 0.62rem;
+        letter-spacing: 0.24em;
+    }
+
+    .final-message p {
+        font-size: 0.98rem;
+        line-height: 1.45;
+    }
+
+    .final-message h1 {
+        font-size: 1.58rem;
+        line-height: 1.28;
+    }
+
+    /*
+       El jardín comienza aproximadamente a la mitad
+       de la pantalla para no tapar los mensajes.
+    */
+
+    .garden {
+        height: 53vh;
+    }
+
+    .sunflower {
+        height: 330px;
+    }
+
+    .stem {
+        top: 62px;
+        height: 270px;
+        width: 8px;
+    }
+
+    .leaf {
+        width: 65px;
+        height: 30px;
+    }
+
+    .leaf-left {
+        top: 205px;
+        left: 10px;
+    }
+
+    .leaf-right {
+        top: 235px;
+        right: 8px;
+    }
+
+
+    /* Flores laterales */
+
+    .sunflower--1 {
+        left: -50px;
+
+        --flower-size: 95px;
+    }
+
+    .sunflower--2 {
+        left: 5%;
+
+        --flower-size: 105px;
+
+        transform: scale(0.83);
+    }
+
+    .sunflower--3 {
+        left: 50%;
+
+        --flower-size: 135px;
+    }
+
+    .sunflower--4 {
+        right: 5%;
+
+        --flower-size: 105px;
+
+        transform: scale(0.83);
+    }
+
+    .sunflower--5 {
+        right: -50px;
+
+        --flower-size: 92px;
+    }
+
+
+    .fireflies span {
+        width: 3px;
+        height: 3px;
+    }
+}
+
+
+/* =========================================================
+   PANTALLAS MUY PEQUEÑAS
+========================================================= */
+
+@media (max-height: 680px) and (max-width: 600px) {
+
+    .message {
+        top: 10%;
+
+        font-size: 1.12rem;
+    }
+
+    .message--2,
+    .message--3,
+    .message--4,
+    .message--5 {
+        top: 11%;
+    }
+
+    .message--6 {
+        top: 9%;
+
+        font-size: 1.2rem;
+    }
+
+    .final-message {
+        top: 5%;
+
+        padding: 10px;
+    }
+
+    .final-message p {
+        font-size: 0.88rem;
+    }
+
+    .final-message h1 {
+        font-size: 1.38rem;
+    }
+
+    .garden {
+        height: 50vh;
+    }
+
+    .sunflower {
+        height: 300px;
+    }
+}
+
+
+/* =========================================================
+   REDUCIR MOVIMIENTO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
