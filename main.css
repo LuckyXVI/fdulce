@@ -742,6 +742,7 @@ body.sunrise .sun-glow {
     --rotation: -8deg;
     --sway-time: 5.2s;
     --head-time: 4.4s;
+    --center-offset: 0;
 
     transform: scale(0.92);
 }
@@ -753,21 +754,21 @@ body.sunrise .sun-glow {
     --rotation: 5deg;
     --sway-time: 4.7s;
     --head-time: 5.2s;
+    --center-offset: 0;
 
     transform: scale(0.88);
 }
 
 .sunflower--3 {
-    left: 300%;
+    left: 50%;
 
     --flower-size: 165px;
     --rotation: -3deg;
     --sway-time: 5.8s;
     --head-time: 4.8s;
+    --center-offset: -50%;
 
-    transform:
-        translateX(-50%)
-        scale(1);
+    transform: translateX(-50%);
 }
 
 .sunflower--4 {
@@ -777,6 +778,7 @@ body.sunrise .sun-glow {
     --rotation: 7deg;
     --sway-time: 5s;
     --head-time: 4.5s;
+    --center-offset: 0;
 
     transform: scale(0.9);
 }
@@ -788,6 +790,7 @@ body.sunrise .sun-glow {
     --rotation: -6deg;
     --sway-time: 4.9s;
     --head-time: 5.4s;
+    --center-offset: 0;
 
     transform: scale(0.9);
 }
